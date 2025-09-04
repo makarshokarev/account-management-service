@@ -1,0 +1,58 @@
+# Account Management Service Configuration
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1
+
+spring:
+  application:
+    name: account-management-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/account_db
+    username: root
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+    show-sql: false
+    open-in-view: false
+
+  liquibase:
+    enabled: false
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+    time-zone: UTC
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,liquibase
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+  tracing:
+    enabled: false
+
+springdoc:
+  swagger-ui:
+    display-request-duration: true
+    try-it-out-enabled: true
+  packages-to-scan: com.fintech.controller
+  show-actuator: false
+
+logging:
+    level:
+      com.fintech: DEBUG
+      org.springframework.web: INFO
